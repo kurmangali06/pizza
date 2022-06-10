@@ -1,0 +1,79 @@
+.root {
+  position: relative;
+  left: -120px;
+  @media (max-width:1260px) {
+    margin: 0 auto;
+    padding-left: 200px;
+    margin-top: 30px;
+  }
+  @media (max-width:650px) {
+    padding-left: 175px;
+    .input {
+      width: 300px;
+      
+    }
+  }
+  @media (max-width:510px){
+    padding-left: 150px;
+    .input {
+      width: 250px;
+      
+    }
+  }
+  @media (max-width:390px) {
+    padding-left: 145px;
+    .input {
+      width: 200px;
+      
+    }
+  }
+}
+
+
+.input {
+  border: 1px solid rgba(0, 0 ,0,0.1);
+  padding: 12px 20px;
+  padding-left: 42px;
+  width: 400px;
+  border-radius: 12px;
+  font-size: 16px;
+  @media (max-width:1400px) {
+    width: 300px;
+    
+}
+@media (max-width:1260px) {
+  width: 300px;
+  margin-left: 20px;
+  display: flex;
+  flex: center;
+}
+  
+  
+  &:focus {
+    border: 1px solid rgba(0, 0 ,0,0.2);
+    
+  }
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  opacity: 0.3;
+  position: absolute;
+  left: 14px;
+  top: 12px;
+}
+.clearIcon{
+  width: 18px;
+  height: 18px;
+  opacity: 0.3;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  cursor: pointer;
+
+  &:hover{
+    opacity: 0.8;
+  }
+
+}
