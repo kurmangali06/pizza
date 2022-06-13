@@ -5,20 +5,23 @@ import { useRef } from 'react'
 import depounce from 'lodash.debounce'
 
 import style from "./Search.module.scss"
+import { useDispatch } from 'react-redux'
+import { setSearhValue } from '../../redux/slices/filterSlice'
 
-export default function Search({setSearchValue}) {
+export default function Search() {
+  const dispatch = useDispatch()
   const inputRef = useRef()
   const [value, setValue ]= useState('')
 
   const onClickClear = () => {
-    setSearchValue('') 
+    dispatch(setSearhValue(''))
     setValue('')
     inputRef.current.focus()
   }
 
   const updateSearhValue = useCallback(
     depounce((str) => {
-      setSearchValue(str)
+      dispatch(setSearhValue(str))
     }, 500),
     []
   )
