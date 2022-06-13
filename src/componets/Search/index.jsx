@@ -33,7 +33,7 @@ export default function Search() {
   return (
     <div className={style.root}>
       <img className={style.icon} src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/System-search.svg/1200px-System-search.svg.png'/>
-      <input ref={inputRef} className={style.input} placeholder='Поиск пицци...' value={value} onChange={ onChangeInput }/>
+      <input ref={inputRef} className={style.input} placeholder='Поиск пиццы...' value={value} onChange={ onChangeInput }/>
       {value && (<img onClick={onClickClear} className={style.clearIcon} src='https://i.ya-webdesign.com/images/oyster-clipart-watercolor-18.png'/>)}
     </div>
     

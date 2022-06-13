@@ -5,8 +5,12 @@ import axios from "axios"
 import { useState } from 'react'
 import './FullPizza.scss'
 
-export default function FullPizza() {
-  const [pizza, setPizza ] = useState()
+ const FullPizza: React.FC = () => {
+  const [pizza, setPizza ] = useState <{
+    title: string,
+    imageUrl: string,
+    price:string
+  }>()
   const {id} = useParams()
   const navigate = useNavigate()
 
@@ -26,7 +30,7 @@ export default function FullPizza() {
 
 
   if(!pizza) {
-    return "загрузка...";
+    return <>загрузка...</>;
   }
 
   return (
@@ -37,3 +41,5 @@ export default function FullPizza() {
     </div>
   )
 }
+
+export default FullPizza
