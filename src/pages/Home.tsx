@@ -9,15 +9,14 @@ import Categories from '../componets/Categories'
 import Pagination from '../componets/Pagination'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectFilter, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice'
-import { Link, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice'
 
 
 
 
 
-
-export default function Home() {
+ const Home:React.FC = () => {
   const navigate = useNavigate()
   const {categoryId, sort, currentPage, searchValue}  = useSelector(selectFilter)
   const {items, status}  = useSelector(selectPizzaData)
@@ -29,11 +28,11 @@ export default function Home() {
   
 
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id))
   }
 
-  const onChangePage = page =>{
+  const onChangePage = (page:number) =>{
     dispatch(setCurrentPage(page))
   }
 
@@ -43,7 +42,9 @@ export default function Home() {
     const category =categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : ''; 
 
-        dispatch( fetchPizzas({
+        dispatch(
+          //@ts-ignore
+          fetchPizzas({
           sortBy,
           order,
           category,
@@ -92,13 +93,13 @@ export default function Home() {
   
   },[categoryId, sort.sortProperty,  currentPage])
 
-  const pizzas = items.map((obj) => <PizzaBlock   key={obj.id} {...obj} /> );
+  const pizzas = items.map((obj:any) => <PizzaBlock   key={obj.id} {...obj} /> );
   const skeletons = [...new Array(4)].map((_, index) => <Skeleton key={index} />)
   
   return (
     <>
     <div className="content__top">
-      <Categories value={categoryId} onChangeCategory={(i)=>onChangeCategory(i)}  />
+      <Categories value={categoryId} onChangeCategory={(i:number)=>onChangeCategory(i)}  />
       <Sort  />
     </div>
     <h2 className="content__title">Все пиццы</h2>
@@ -118,3 +119,7 @@ export default function Home() {
   </>
   )
 }
+
+
+
+export default Home

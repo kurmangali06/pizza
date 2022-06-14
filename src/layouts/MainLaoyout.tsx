@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from '../componets/Header'
 
-export default function MainLaoyout() {
+ const MainLaoyout:React.FC = () => {
   return (
     <div className="wrapper">
      <Header />
@@ -12,3 +12,4 @@ export default function MainLaoyout() {
   </div>
   )
 }
+export default MainLaoyout

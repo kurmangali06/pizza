@@ -9,7 +9,7 @@ import './FullPizza.scss'
   const [pizza, setPizza ] = useState <{
     title: string,
     imageUrl: string,
-    price:string
+    price:number
   }>()
   const {id} = useParams()
   const navigate = useNavigate()

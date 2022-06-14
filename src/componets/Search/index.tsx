@@ -8,15 +8,15 @@ import style from "./Search.module.scss"
 import { useDispatch } from 'react-redux'
 import { setSearhValue } from '../../redux/slices/filterSlice'
 
-export default function Search() {
+ const Search:React.FC = () => {
   const dispatch = useDispatch()
-  const inputRef = useRef()
+  const inputRef = useRef<HTMLInputElement>(null)
   const [value, setValue ]= useState('')
 
   const onClickClear = () => {
     dispatch(setSearhValue(''))
     setValue('')
-    inputRef.current.focus()
+    inputRef.current?.focus()
   }
 
   const updateSearhValue = useCallback(
@@ -26,7 +26,7 @@ export default function Search() {
     []
   )
 
-  const onChangeInput = event => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
     updateSearhValue(event.target.value)
   }
@@ -39,3 +39,5 @@ export default function Search() {
     
   )
 }
+
+export default Search

@@ -3,7 +3,7 @@ import ContentLoader from "react-content-loader"
 import style from './skeleton.module.scss'
 
 
-const Skeleton = (props) => (
+const Skeleton:React.FC = (props) => (
   <ContentLoader 
     className={style.skeleton}
     speed={2}
