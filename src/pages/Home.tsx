@@ -4,13 +4,15 @@ import qs from 'qs'
 
 import PizzaBlock from '../componets/PizzaBlog'
 import Skeleton from '../componets/PizzaBlog/Skeleton'
-import Sort, { sortlist } from '../componets/Sort'
+import  { sortlist } from '../componets/Sort'
 import Categories from '../componets/Categories'
 import Pagination from '../componets/Pagination'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 import { selectFilter, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice'
 import {  useNavigate } from 'react-router-dom'
-import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice'
+import { fetchPizzas, SearchPizzaParams, selectPizzaData } from '../redux/slices/pizzaSlice'
+import { useAppDispatch } from '../redux/store'
+import SortPup from '../componets/Sort'
 
 
 
@@ -22,7 +24,7 @@ import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice'
   const {items, status}  = useSelector(selectPizzaData)
   const isSearch = useRef(false)
   const isMounted = useRef(false)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
 
   
@@ -43,27 +45,28 @@ import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice'
     const search = searchValue ? `&search=${searchValue}` : ''; 
 
         dispatch(
-          //@ts-ignore
           fetchPizzas({
           sortBy,
           order,
           category,
           search,
-          currentPage
+          currentPage: String(currentPage)
         }))
         window.scrollTo(0, 0)
   }  
 
     useEffect(()=> {
       if(window.location.search){
-        const params = qs.parse(window.location.search.substring(1))
+        const params = (qs.parse(window.location.search.substring(1))as unknown) as SearchPizzaParams
 
-        const sort = sortlist.find(obj => obj.sortProperty === params.sortProperty)
+        const sort = sortlist.find(obj => obj.sortProperty === params.sortBy)
         
         dispatch(
           setFilters({
-            ...params,
-            sort,
+            searchValue: params.search,
+            categoryId: Number(params.category),
+            currentPage: Number(params.currentPage),
+            sort : sort ? sort : sortlist[0]
           })
         )
         isSearch.current = true
@@ -100,7 +103,7 @@ import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice'
     <>
     <div className="content__top">
       <Categories value={categoryId} onChangeCategory={(i:number)=>onChangeCategory(i)}  />
-      <Sort  />
+      <SortPup/>
     </div>
     <h2 className="content__title">Все пиццы</h2>
     {
