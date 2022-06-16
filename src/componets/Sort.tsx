@@ -1,11 +1,16 @@
 import React, { useEffect, useRef } from 'react'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectSort, setSort, Sort, SortPropertyEnum } from '../redux/slices/filterSlice'
+import { useDispatch,  } from 'react-redux'
+import {  setSort, Sort, SortPropertyEnum } from '../redux/slices/filterSlice'
+
 
 type SortItem = {
   name:string,
   sortProperty: SortPropertyEnum
+}
+
+type SortPupProps = {
+  value:Sort
 }
 
 export  const sortlist: SortItem[] = [
@@ -16,11 +21,12 @@ export  const sortlist: SortItem[] = [
   {name: 'алфавиту (des)', sortProperty:SortPropertyEnum.TITLE_DESC},
   {name: 'алфавиту (asc)', sortProperty:SortPropertyEnum.TITLE_ASC}, ]
 
- const SortPup:React.FC = () => {
-  const dispatch = useDispatch()
-  const sort = useSelector(selectSort)
-  const sortRef = useRef<HTMLDivElement>(null)
 
+
+ const SortPup:React.FC<SortPupProps> = ({value}) => {
+ 
+  const dispatch = useDispatch()
+  const sortRef = useRef<HTMLDivElement>(null)
   const [ open, setOpen] = useState(false)
 
 
@@ -65,7 +71,7 @@ export  const sortlist: SortItem[] = [
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={()=> setOpen(!open)}>{sort.name}</span>
+        <span onClick={()=> setOpen(!open)}>{value.name}</span>
       </div>
       {
         open && (
@@ -76,7 +82,7 @@ export  const sortlist: SortItem[] = [
                 <li 
                 key={i}
                 onClick={()=> onClickListItem(obj)}
-                className={sort.sortProperty === obj.sortProperty ? 'active' : ''}
+                className={value.sortProperty === obj.sortProperty ? 'active' : ''}
                 >
                   {obj.name}
                 </li>

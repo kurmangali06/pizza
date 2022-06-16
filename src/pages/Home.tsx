@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { useEffect } from 'react'
 import qs from 'qs'
 
@@ -29,10 +29,10 @@ import SortPup from '../componets/Sort'
 
   
 
-
-  const onChangeCategory = (id: number) => {
-    dispatch(setCategoryId(id))
-  }
+  const onChangeCategory =  useCallback((id: number) => {
+  dispatch(setCategoryId(id))
+}, [])
+  
 
   const onChangePage = (page:number) =>{
     dispatch(setCurrentPage(page))
@@ -102,8 +102,8 @@ import SortPup from '../componets/Sort'
   return (
     <>
     <div className="content__top">
-      <Categories value={categoryId} onChangeCategory={(i:number)=>onChangeCategory(i)}  />
-      <SortPup/>
+      <Categories value={categoryId} onChangeCategory={onChangeCategory}  />
+      <SortPup value={sort} />
     </div>
     <h2 className="content__title">Все пиццы</h2>
     {
