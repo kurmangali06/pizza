@@ -8,11 +8,14 @@ import  { sortlist } from '../componets/Sort'
 import Categories from '../componets/Categories'
 import Pagination from '../componets/Pagination'
 import {  useSelector } from 'react-redux'
-import { selectFilter, setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice'
+import {  setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filter/slice'
 import {  useNavigate } from 'react-router-dom'
-import { fetchPizzas, SearchPizzaParams, selectPizzaData } from '../redux/slices/pizzaSlice'
+import { SearchPizzaParams} from '../redux/slices/pizza/types'
 import { useAppDispatch } from '../redux/store'
 import SortPup from '../componets/Sort'
+import { selectFilter } from '../redux/slices/filter/selectors'
+import { selectPizzaData } from '../redux/slices/pizza/selectors'
+import { fetchPizzas } from '../redux/slices/pizza/slice'
 
 
 
