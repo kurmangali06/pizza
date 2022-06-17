@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/FullPizza.69b035b9.chunk.css","mappings":"AAAA,YACE,cACA,gBACE","sources":["pages/FullPizza.scss"],"sourcesContent":[".full-pizza {\r\n  margin: 0 auto;\r\n  img {\r\n    width: 70%\r\n  }\r\n}"],"names":[],"sourceRoot":""}
