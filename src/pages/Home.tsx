@@ -21,6 +21,7 @@ import { fetchPizzas } from '../redux/slices/pizza/slice'
 
 
 
+
  const Home:React.FC = () => {
   const navigate = useNavigate()
   const {categoryId, sort, currentPage, searchValue}  = useSelector(selectFilter)
@@ -30,7 +31,7 @@ import { fetchPizzas } from '../redux/slices/pizza/slice'
   const dispatch = useAppDispatch()
 
 
-  
+ 
 
   const onChangeCategory =  useCallback((id: number) => {
   dispatch(setCategoryId(id))
